@@ -1,0 +1,112 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: "Noto Sans SC", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  color: #141414;
+  background-color: #ffe14d;
+  background-image: radial-gradient(#14141414 1.6px, transparent 1.6px),
+    linear-gradient(155deg, #fffbe5 0%, #fff0a3 22%, #ffe14d 52%, #ffd60a 78%, #ffc93c 100%);
+  background-size: 22px 22px, 100% 100%;
+  background-repeat: repeat, no-repeat;
+  background-attachment: fixed, fixed;
+  -webkit-tap-highlight-color: transparent;
+  overflow-x: hidden;
+}
+
+/* 粗描边 + 硬投影的贴纸卡片 */
+@layer components {
+  .sticker {
+    @apply rounded-2xl border-[3px] border-ink bg-paper shadow-sticker;
+  }
+
+  .sticker-sm {
+    @apply rounded-xl border-[3px] border-ink bg-paper shadow-sticker-sm;
+  }
+
+  .sticker-tilt {
+    @apply sticker transition-transform duration-200 hover:-rotate-1 hover:-translate-y-1;
+  }
+
+  .btn-sticker {
+    @apply inline-flex select-none items-center justify-center gap-2 rounded-full border-[3px]
+      border-ink px-6 py-3 font-bold shadow-sticker transition-all duration-150
+      hover:-translate-y-0.5 hover:shadow-sticker-lg active:translate-y-0.5 active:shadow-none;
+  }
+
+  .btn-primary {
+    @apply btn-sticker bg-tomato text-white;
+  }
+
+  .btn-lemon {
+    @apply btn-sticker bg-lemon-400 text-ink;
+  }
+
+  .btn-plain {
+    @apply btn-sticker bg-paper text-ink;
+  }
+
+  /* 渐变黄：主黄面/卡片底色 */
+  .bg-lemon-grad {
+    background-image: linear-gradient(150deg, #fffbe5 0%, #fff0a3 30%, #ffe14d 62%, #ffd60a 100%);
+  }
+
+  .field-sticker {
+    @apply w-full rounded-xl border-[3px] border-ink bg-paper px-4 py-3 font-bold text-ink
+      outline-none transition-colors placeholder:font-normal placeholder:text-ink/35
+      focus:bg-lemon-100;
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-1 rounded-full border-[3px] border-ink px-3 py-1 text-sm font-bold;
+  }
+
+  /* 手绘感虚线分割 */
+  .dashed-ink {
+    @apply border-b-[3px] border-dashed border-ink/25;
+  }
+
+  .title-doodle {
+    @apply font-doodle tracking-wide;
+    text-shadow: 3px 3px 0 #141414;
+  }
+}
+
+/* 画布区域禁止触摸滚动，保证涂鸦手感 */
+.doodle-surface {
+  touch-action: none;
+  cursor: crosshair;
+}
+
+/* 细一点的滚动条，风格统一 */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: #141414;
+  border-radius: 999px;
+  border: 2px solid #ffe14d;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
